@@ -1,0 +1,111 @@
+﻿<Window x:Class="File_Find.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:File_Find"
+        mc:Ignorable="d"
+        Title="File Finder" Height="560" Width="715" ResizeMode="NoResize" Background="#f0f0f0">
+
+    <Grid>
+        <DockPanel>
+            <StatusBar DockPanel.Dock="Bottom" VerticalAlignment="Bottom" Background="White" Height="25">
+                <StatusBarItem x:Name="fileFoundCount_lbl" Content="Files Found: 0"/>
+                <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+                <StatusBarItem x:Name="statusError_lbl" Width="440"/>
+                <StatusBarItem>
+                    <ProgressBar x:Name="loading_prgbar" Height="15" Width="150" Margin="5,0,0,0" Minimum="0" Maximum="100" IsIndeterminate="False" Visibility="Collapsed"/>
+                </StatusBarItem>
+            </StatusBar>
+        </DockPanel>
+
+        <StackPanel HorizontalAlignment="Left" Height="95" Margin="20,20,0,0" VerticalAlignment="Top" Width="85">
+            <Label x:Name="directory_lbl" Content="Directory: " Padding="10 10 10 10" Margin="0,5,0,0" FontSize="15" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+            <Label x:Name="search_lbl" Content="Search: " Padding="10 10 10 10"  Margin="0,10,0,0" FontSize="15" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+        </StackPanel>
+
+
+        <GroupBox Header="Search Options" Height="116" HorizontalAlignment="Left" Margin="20,125,0,0" VerticalAlignment="Top" Width="660">
+            <Grid HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="660">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Height="100" VerticalAlignment="Top" Width="660">
+                    <StackPanel Orientation="Horizontal" Height="30">
+                        <Label x:Name="navSubDirs_lbl" FontSize="16" VerticalAlignment="Center" Height="25" Width="190" HorizontalAlignment="Center" VerticalContentAlignment="Center" Padding="5,0,0,0" Content="Navigate Subdirectories"/>
+                        <CheckBox x:Name="navSubDirs_chbx" Width="30" Height="40" VerticalAlignment="Center" Padding="0,1,0,0" RenderTransformOrigin="0.5,0.5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left">
+                            <CheckBox.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="1.25" ScaleY="1.25"/>
+                                </TransformGroup>
+                            </CheckBox.RenderTransform>
+                        </CheckBox>
+
+
+                        <Label x:Name="matchCase_lbl" FontSize="16" Height="25" Width="100" VerticalContentAlignment="Center" Padding="5,0,0,0" Content="Match Case" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        <CheckBox x:Name="matchCase_chbx" Width="30" Height="40" VerticalAlignment="Center" Padding="0,1,0,0" RenderTransformOrigin="0.5,0.5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" >
+                            <CheckBox.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="1.25" ScaleY="1.25"/>
+                                </TransformGroup>
+                            </CheckBox.RenderTransform>
+                        </CheckBox>
+
+
+                        <Label x:Name="fileType_lbl" FontSize="16" VerticalAlignment="Top" Height="25" Width="75" HorizontalAlignment="Left" VerticalContentAlignment="Center" Padding="5,0,0,0" Content="File Type: " Margin="45,0,0,0"/>
+                        <ComboBox x:Name="fileType_cmbx" Width="175" VerticalAlignment="Top" HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom" Padding="4,0,0,0" Margin="0,5,0,0" HorizontalAlignment="Left"  Height="20" FontSize="14" SelectionChanged="fileType_cmbx_SelectionChanged">
+                            <ComboBoxItem x:Name="txtFile_cmbitem" Content="Text File (*.txt)" HorizontalAlignment="Left" Width="173" HorizontalContentAlignment="Left"/>
+                            <ComboBoxItem x:Name="wordDoc_cmbitem" Content="Word Document (*.docx)" HorizontalAlignment="Left" Width="173" HorizontalContentAlignment="Left"/>
+                            <ComboBoxItem x:Name="excel_cmbitem" Content="Excel Workbook (*.xlsx)" HorizontalAlignment="Left" Width="173" HorizontalContentAlignment="Left"/>
+                            <ComboBoxItem x:Name="csv_cmbitem" Content="CSV (*.csv)" HorizontalAlignment="Left" Width="173" HorizontalContentAlignment="Left"/>
+                            <ComboBoxItem x:Name="allFiles_cmbitem" Content="All Files (*.*)" HorizontalAlignment="Left" Width="173" HorizontalContentAlignment="Left"/>
+                        </ComboBox>
+
+                    </StackPanel>
+
+
+                    <StackPanel Orientation="Horizontal" Height="30">
+                        <Label x:Name="wholeWord_lbl" FontSize="16" VerticalAlignment="Center" Height="25" Width="190" HorizontalAlignment="Center" VerticalContentAlignment="Center" Padding="5,0,0,0" Content="Match Whole Word"/>
+                        <CheckBox x:Name="matchWholeWord_chbx" Width="30" Height="40" VerticalAlignment="Center" Padding="0,1,0,0" RenderTransformOrigin="0.5,0.5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" >
+                            <CheckBox.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="1.25" ScaleY="1.25"/>
+                                </TransformGroup>
+                            </CheckBox.RenderTransform>
+                        </CheckBox>
+                        <Label x:Name="error_lbl" FontSize="15" Foreground="Red" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="260,0,0,0"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Height="30">
+                        <Label x:Name="findInFiles_lbl" FontSize="16" VerticalAlignment="Center" Height="25" Width="190" HorizontalAlignment="Center" VerticalContentAlignment="Center" Padding="5,0,0,0" Content="Find In Files"/>
+                        <CheckBox x:Name="findInFiles_chbx" Width="30" Height="40" VerticalAlignment="Center" Padding="0,1,0,0" RenderTransformOrigin="0.5,0.5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left">
+                            <CheckBox.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="1.25" ScaleY="1.25"/>
+                                </TransformGroup>
+                            </CheckBox.RenderTransform>
+                        </CheckBox>
+                    </StackPanel>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+
+
+        <StackPanel HorizontalAlignment="Left" Height="95" Margin="100,20,0,0" VerticalAlignment="Top" Width="500">
+            <TextBox x:Name="directory_txtbx" Height="40" Padding="5,5,0,0" FontSize="15"  Margin="0,5,20,10" VerticalContentAlignment="Center" TextChanged="directory_txtbx_TextChanged"/>
+            <TextBox x:Name="search_txtbx" Height="40" Padding="5,5,0,0" FontSize="15" Margin="0,0,20,0" VerticalContentAlignment="Center" TextChanged="search_txtbx_TextChanged" KeyDown="CheckEnterHandler"/>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Left" Height="95" Margin="590,20,-3,0" VerticalAlignment="Top" Width="120">
+            <Button x:Name="browse_btn" Content="Browse" Height="35" Margin="0,8,35,0" VerticalAlignment="Center" Click="browse_btn_Click"/>
+            <Button x:Name="search_btn" Content="Search" Height="35"  Margin="0,15,35,0" IsEnabled="False" Click="search_btn_Click"/>
+        </StackPanel>
+
+        <GroupBox Header="Results" HorizontalAlignment="Left" Height="230" Margin="20,260,0,0" VerticalAlignment="Top" Width="660">
+            <Grid>
+                <StackPanel HorizontalAlignment="Left" Height="208" VerticalAlignment="Top" Width="648" >
+                    <ListView x:Name="foundFiles_lstbx" Height="208" MouseDoubleClick="FoundFiles_DoubleClick" Width="648" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+
+
+
+
+    </Grid>
+</Window>

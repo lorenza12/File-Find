@@ -13,6 +13,10 @@
 
 ### Screenshots
 
+![Results](imgs/Screenshot%201.PNG)
+![Right Click](imgs/Screenshot%202.PNG)
+![File Types](imgs/Screenshot%203.PNG)
+
 ### Features
 
 * Ability to search for keyword within various file-types

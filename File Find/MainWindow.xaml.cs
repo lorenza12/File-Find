@@ -31,8 +31,11 @@ namespace File_Find
         {
             InitializeComponent();
 
-        }
+            //Set the defualt filetype as All Files
+            fileType_cmbx.SelectedIndex = 4;
+            EnforceStipulations();
 
+        }
 
         private void browse_btn_Click(object sender, RoutedEventArgs e)
         {
@@ -46,12 +49,7 @@ namespace File_Find
 
                     string[] files = Directory.GetFiles(fbd.SelectedPath);
 
-                    // System.Windows.Forms.MessageBox.Show("Files found: " + files.Length.ToString(), "Message");
-
-
                     searcher.SearchDirectory = fbd.SelectedPath.ToString();
-
-                    // System.Windows.Forms.MessageBox.Show(searcher.SearchDirectory.ToString());
 
                 }
 
@@ -59,8 +57,6 @@ namespace File_Find
 
             Enable_Search_Btn();
         }
-
-
 
         private void search_txtbx_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -74,11 +70,7 @@ namespace File_Find
             searcher.FileType = searcher.GetFileType((e.AddedItems[0] as ComboBoxItem).Content.ToString());
 
             EnforceStipulations();
-
-            // System.Windows.Forms.MessageBox.Show(searcher.FileType);
-
             Enable_Search_Btn();
-
 
         }
 
@@ -97,8 +89,6 @@ namespace File_Find
             {
                 searcher.SearchDirectory = directory_txtbx.Text.Trim();
             }
-
-
 
             Enable_Search_Btn();
 
@@ -139,8 +129,6 @@ namespace File_Find
                 }
 
                 fileFoundCount_lbl.Content = "Files Found: " + searcher.FoundFiles.Length.ToString();
-
-
                 loading_prgbar.IsIndeterminate = false;
                 loading_prgbar.Visibility = Visibility.Collapsed;
             }
@@ -150,8 +138,6 @@ namespace File_Find
                 loading_prgbar.Visibility = Visibility.Visible;
                 statusError_lbl.Content = "Error: " + ex.ToString();
             }
-
-
         }
 
         private void EnforceStipulations()
@@ -161,11 +147,10 @@ namespace File_Find
                 matchWholeWord_chbx.IsEnabled = false;
                 matchWholeWord_chbx.IsChecked = false;
                 wholeWord_lbl.IsEnabled = false;
-
                 statusError_lbl.Content = "Note: Match whole word functionality doesn't properly work on csv formats";
             }
 
-            else if (searcher.FileType == ".*")
+            else if (searcher.FileType == ".*" && (findInFiles_chbx.IsChecked ?? false))
             {
 
                 statusError_lbl.Content = "Note: Find in files functionality doesn't work on all file types";
@@ -220,14 +205,6 @@ namespace File_Find
             {
                 searcher.MatchCase = false;
             }
-
-
-        }
-
-
-        public void SetErrorMessage(string errorMsg)
-        {
-            error_lbl.Content = errorMsg;
         }
 
         private void CheckEnterHandler(object sender, System.Windows.Input.KeyEventArgs e)
@@ -253,6 +230,74 @@ namespace File_Find
                 statusError_lbl.Content = "Error: Couldn't Open File";
 
             }
+        }
+
+        private void Chbx_Checked(object sender, RoutedEventArgs e)
+        {
+            EnforceStipulations();
+        }
+
+        private void OpenDirectoryContextMenu_OnClick(object sender, RoutedEventArgs e)
+        {
+
+            string errorMsg = "";
+
+            foreach (var item in foundFiles_lstbx.SelectedItems)
+            {
+                try
+                {
+                    string dir = item.ToString().Substring(0, item.ToString().LastIndexOf('\\'));
+                    Process.Start(dir);
+
+                }
+                catch (Exception ex)
+                {
+                    errorMsg += " " + item.ToString();
+
+                }
+            }
+            if (errorMsg.Length > 0)
+            {
+                statusError_lbl.Content = $"Error: Couldn't Open Directory {errorMsg}";
+
+            }
+            else
+            {
+                statusError_lbl.Content = "";
+
+            }
+
+        }
+
+        private void OpenFileContextMenu_OnClick(object sender, RoutedEventArgs e)
+        {
+
+            string errorMsg = "";
+
+            foreach (var item in foundFiles_lstbx.SelectedItems)
+            {
+                try
+                {
+                    Process.Start((item.ToString()));
+
+                }
+                catch (Exception ex)
+                {
+                    errorMsg += " " + item.ToString();
+
+                }
+            }
+            if (errorMsg.Length > 0)
+            {
+                statusError_lbl.Content = $"Error: Couldn't Open File(s) {errorMsg}";
+
+            }
+            else
+            {
+                statusError_lbl.Content = "";
+
+            }
+
         }
     }
 }

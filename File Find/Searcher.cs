@@ -58,7 +58,6 @@ namespace File_Find
         public bool MatchCase { get => matchCase; set => matchCase = value; }
         public string[] FoundFiles { get => foundFiles; set => foundFiles = value; }
 
-
         public void SearchForFiles()
         {
             try
@@ -69,22 +68,22 @@ namespace File_Find
                 if (!Directory.Exists(this.searchDirectory))
                 {
 
-                    this.errorMessage = "Error: Directory Doesn't Exist!";
+                    this.errorMessage = "Error: Directory Doesn't Exist";
 
                 }
+
                 else
                 {
 
                     string searchFile = "";
-
-
                     if (this.MatchWholeWord)
                     {
                         searchFile = this.SearchWord + this.FileType;
                     }
+
                     else
                     {
-                        searchFile = this.SearchWord.Trim() + "*" + this.FileType;
+                        searchFile = $"*{this.SearchWord.Trim()}*{this.FileType}";
                     }
 
                     if (!this.MatchCase)
@@ -92,59 +91,120 @@ namespace File_Find
                         this.SearchWord = this.SearchWord.ToLower();
                     }
 
+                    //Not the most effeiciant way of searching for files/directories but this 
+                    //method prevents the search from canceling if an I/O execption is raised
+                    var pathsToSearch = new Queue<string>();
+                    var foundFiles = new List<string>();
 
+                    //only used if we are searching within files
+                    var foundInFiles = new List<string>();
 
-                    try
+                    pathsToSearch.Enqueue(this.SearchDirectory);
+
+                    while (pathsToSearch.Count > 0)
                     {
-                        string[] found;
-                        //Find files that match the name
-                        found = Directory.GetFiles(this.SearchDirectory, searchFile, (this.NavSubDirectories ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly));
+                        var dir = pathsToSearch.Dequeue();
 
-                        if (this.MatchCase)
+                        try
                         {
-                            var caseList = new List<string>(found);
-                            foreach (string file in found)
+                            //if user wants to search in files, we need to check all files (*) regardless of their name
+                            var files = Directory.GetFiles(dir, (this.FindInFiles ? "*" : searchFile));
+
+                            if (this.findInFiles)
                             {
-                                if (!file.Contains(this.SearchWord))
+                                //foundInFiles.Concat(CheckInFiles(files));
+
+                                var inFilesResults = CheckInFiles(files);
+
+                                //can't concat null list so must specifically check
+                                if (foundInFiles.Count == 0 && inFilesResults.Count > 0)
                                 {
-                                    caseList.Remove(file);
+                                    foundInFiles = inFilesResults;
+                                }
+
+                                else if (inFilesResults.Count == 0 && foundInFiles.Count > 0)
+                                {
+                                    //skip because nothing was found in the files so we don't need to add any
+                                }
+
+                                else
+                                {
+                                    //both list have data or both list are empty so concat them 
+                                    foundInFiles = foundInFiles.Concat(inFilesResults).ToList();
+                                }
+
+                            }
+
+                            foreach (var file in Directory.GetFiles(dir, searchFile))
+                            {
+                                if (this.MatchCase)
+                                {
+                                    //Contains method is case sensitive search
+                                    if (file.Contains(this.SearchWord))
+                                    {
+                                        foundFiles.Add(file);
+                                    }
+
+                                }
+                                else
+                                {
+                                    foundFiles.Add(file);
                                 }
                             }
-                            found = caseList.ToArray();
+
+                            if (this.NavSubDirectories)
+                            {
+                                //if user selected to naviagte sub directories
+                                //queue sub directories up
+                                foreach (var subDir in Directory.GetDirectories(dir))
+                                {
+                                    pathsToSearch.Enqueue(subDir);
+                                }
+                            }
+
                         }
 
-                        if (FindInFiles)
+                        catch (UnauthorizedAccessException)
                         {
-                            //Search within file type
-                            string[] CheckFiles = Directory.GetFiles(this.SearchDirectory, "*" + this.fileType, (this.NavSubDirectories ? SearchOption.AllDirectories : SearchOption.TopDirectoryOnly));
+                            //Skip files/folders that we don't have access to and continue
+                            //Console.WriteLine(dir.ToString());
+                        }
+                        catch (Exception)
+                        {
+                            //skip any other I/O errors and continue
+                        }
+                    }
 
-                            string[] textInFile = CheckInFiles(CheckFiles);
-
-                            this.FoundFiles = found.Union(textInFile).ToArray<string>();
-
-
+                    if (this.findInFiles)
+                    {
+                        //can't concat null list so must specifically check
+                        if (foundInFiles.Count == 0 && foundFiles.Count > 0)
+                        {
+                            this.foundFiles = foundFiles.ToArray();
+                        }
+                        else if (foundFiles.Count == 0 && foundInFiles.Count > 0)
+                        {
+                            this.foundFiles = foundInFiles.ToArray();
                         }
                         else
                         {
-                            this.FoundFiles = found;
+                            //both list have data or both list are empty so concat them 
+                            this.foundFiles = foundInFiles.Concat(foundFiles).ToList().ToArray();
                         }
-
-
                     }
-                    catch (Exception UnauthorizedAccessException)
+
+                    else
                     {
-                        this.errorMessage = "Error: Unauthorized access to a file and/or folder that was scanned";
+                        this.foundFiles = foundFiles.ToArray();
                     }
-
                 }
             }
             catch (Exception e)
             {
                 //this.errorMessage = e.ToString();
-                this.errorMessage = "Unhandled Error: " + e.ToString();
+                this.errorMessage = "Error: " + e.ToString();
             }
         }
-
         public string GetFileType(string lngFileType)
         {
             string fileType;
@@ -179,9 +239,10 @@ namespace File_Find
             return fileType;
         }
 
-        private string[] CheckInFiles(string[] checkFiles)
+        private List<string> CheckInFiles(string[] checkFiles)
         {
-            string[] results = new string[] { };
+            var results = new List<string>();
+
             switch (FileType)
             {
                 case ".txt":
@@ -189,22 +250,21 @@ namespace File_Find
                 case ".*":
                     results = CheckTextFile(checkFiles);
                     break;
+
                 case ".docx":
                     results = CheckWordFile(checkFiles);
                     break;
+
                 case ".xlsx":
                     results = CheckExcelFile(checkFiles);
                     break;
-
             }
-
             return results;
         }
 
-        private string[] CheckWordFile(string[] checkFiles)
+        private List<string> CheckWordFile(string[] checkFiles)
         {
             var matches = new List<string>();
-            string[] returnAray;
 
             Microsoft.Office.Interop.Word.Application word = new Microsoft.Office.Interop.Word.Application();
             Microsoft.Office.Interop.Word.Document doc = new Microsoft.Office.Interop.Word.Document();
@@ -225,8 +285,6 @@ namespace File_Find
                     string ReadValue = string.Empty;
                     // Activate the document
                     doc.Activate();
-
-
                     foreach (Microsoft.Office.Interop.Word.Range tmpRange in doc.StoryRanges)
                     {
                         if (this.MatchCase)
@@ -268,7 +326,7 @@ namespace File_Find
 
             }
 
-            return (returnAray = matches.Select(i => i.ToString()).ToArray());
+            return matches;
 
         }
 
@@ -277,12 +335,9 @@ namespace File_Find
             Array.Clear(this.FoundFiles, 0, this.FoundFiles.Length);
         }
 
-        private string[] CheckTextFile(string[] filesToCheck)
+        private List<string> CheckTextFile(string[] filesToCheck)
         {
             var matches = new List<string>();
-            string[] returnAray;
-
-
             foreach (string file in filesToCheck)
             {
                 try
@@ -325,14 +380,13 @@ namespace File_Find
 
             }
 
-            return (returnAray = matches.Select(i => i.ToString()).ToArray());
+            return matches;
 
         }
 
-        private string[] CheckExcelFile(string[] filesToCheck)
+        private List<string> CheckExcelFile(string[] filesToCheck)
         {
             var matches = new List<string>();
-            string[] returnAray;
 
             foreach (string file in filesToCheck)
             {
@@ -350,11 +404,11 @@ namespace File_Find
                             {
                                 temp = item.ToString().Trim();
                             }
+
                             else
                             {
                                 temp = item.ToString().Trim().ToLower();
                             }
-
 
                             if (this.MatchWholeWord)
                             {
@@ -372,17 +426,15 @@ namespace File_Find
 
                                 }
                             }
-
                         }
                     }
                 }
             }
-            return (returnAray = matches.Select(i => i.ToString()).ToArray());
+            return matches;
         }
 
         private DataSet OpenExcelFile(string file)
         {
-
             string connectionString = "Provider = Microsoft.ACE.OLEDB.12.0; Data Source = " + file + "; Extended Properties = 'Excel 12.0;HDR=NO;IMEX=1;'";
             string[] excelsheetNames = GetExcelSheetNames(connectionString);
 
@@ -392,7 +444,6 @@ namespace File_Find
 
         private string[] GetExcelSheetNames(string connectionString)
         {
-
             try
             {
                 OleDbConnection con = null;
@@ -420,13 +471,12 @@ namespace File_Find
             }
             catch (Exception e)
             {
-                this.errorMessage = "";
                 return null;
             }
         }
+
         public DataSet Parse(string connectionString)
         {
-
             try
             {
                 DataSet data = new DataSet();
@@ -448,8 +498,6 @@ namespace File_Find
                         data.Tables[sheetCounter].TableName = sheetName;
 
                         sheetCounter += 1;
-
-
                     }
                 }
 
@@ -457,7 +505,6 @@ namespace File_Find
             }
             catch (Exception e)
             {
-                this.errorMessage = "";
                 return null;
             }
         }

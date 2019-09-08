@@ -1,0 +1,16 @@
+D:\C#\File Find\File Find\bin\Debug\File Find.exe.config
+D:\C#\File Find\File Find\bin\Debug\File Find.exe
+D:\C#\File Find\File Find\bin\Debug\File Find.pdb
+D:\C#\File Find\File Find\obj\Debug\File Find.csprojAssemblyReference.cache
+D:\C#\File Find\File Find\obj\Debug\MainWindow.g.cs
+D:\C#\File Find\File Find\obj\Debug\App.g.cs
+D:\C#\File Find\File Find\obj\Debug\File Find_MarkupCompile.cache
+D:\C#\File Find\File Find\obj\Debug\File Find_MarkupCompile.lref
+D:\C#\File Find\File Find\obj\Debug\MainWindow.baml
+D:\C#\File Find\File Find\obj\Debug\File Find.g.resources
+D:\C#\File Find\File Find\obj\Debug\File_Find.Properties.Resources.resources
+D:\C#\File Find\File Find\obj\Debug\File Find.csproj.GenerateResource.cache
+D:\C#\File Find\File Find\obj\Debug\File Find.csproj.CoreCompileInputs.cache
+D:\C#\File Find\File Find\obj\Debug\File Find.exe
+D:\C#\File Find\File Find\obj\Debug\File Find.pdb
+D:\C#\File Find\File Find\obj\Debug\File Find.csproj.ResolveComReference.cache

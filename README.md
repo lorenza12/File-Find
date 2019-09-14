@@ -13,7 +13,6 @@
 
 ### Screenshots
 
-
 ![Results](imgs/Screenshot%201.PNG)
 ![Right Click](imgs/Screenshot%202.PNG)
 ![File Types](imgs/Screenshot%203.PNG)

@@ -31,7 +31,7 @@ namespace File_Find
         {
             InitializeComponent();
 
-            //Set the defualt filetype as All Files
+            //Set the default filetype as All Files
             fileType_cmbx.SelectedIndex = 4;
             EnforceStipulations();
 
@@ -298,6 +298,30 @@ namespace File_Find
 
             }
 
+        }
+        private void CopyDirectoryContextMenu_OnClick(object sender, RoutedEventArgs e)
+        {
+            var selectedItems = foundFiles_lstbx.SelectedItems;
+            string clipboard = "";
+
+            foreach (var item in selectedItems)
+            {
+                //Don't add newline character if its the last item
+                if (selectedItems.IndexOf(item) == selectedItems.Count - 1)
+                {
+                    clipboard += item.ToString();
+                }
+                else
+                {
+                    clipboard += item.ToString() + System.Environment.NewLine;
+                }
+
+            }
+
+            if (!string.IsNullOrEmpty(clipboard))
+            {
+                System.Windows.Clipboard.SetText(clipboard);
+            }
         }
     }
 }

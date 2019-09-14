@@ -14,3 +14,19 @@ D:\C#\File Find\File Find\obj\Release\File Find.csproj.CoreCompileInputs.cache
 D:\C#\File Find\File Find\obj\Release\File Find.exe
 D:\C#\File Find\File Find\obj\Release\File Find.pdb
 D:\C#\File Find\File Find\obj\Release\File Find.csprojAssemblyReference.cache
+D:\C#\File-Find\File Find\bin\Release\File Find.exe.config
+D:\C#\File-Find\File Find\bin\Release\File Find.exe
+D:\C#\File-Find\File Find\bin\Release\File Find.pdb
+D:\C#\File-Find\File Find\obj\Release\File Find.csprojAssemblyReference.cache
+D:\C#\File-Find\File Find\obj\Release\File Find.csproj.ResolveComReference.cache
+D:\C#\File-Find\File Find\obj\Release\MainWindow.g.cs
+D:\C#\File-Find\File Find\obj\Release\App.g.cs
+D:\C#\File-Find\File Find\obj\Release\File Find_MarkupCompile.cache
+D:\C#\File-Find\File Find\obj\Release\File Find_MarkupCompile.lref
+D:\C#\File-Find\File Find\obj\Release\MainWindow.baml
+D:\C#\File-Find\File Find\obj\Release\File Find.g.resources
+D:\C#\File-Find\File Find\obj\Release\File_Find.Properties.Resources.resources
+D:\C#\File-Find\File Find\obj\Release\File Find.csproj.GenerateResource.cache
+D:\C#\File-Find\File Find\obj\Release\File Find.csproj.CoreCompileInputs.cache
+D:\C#\File-Find\File Find\obj\Release\File Find.exe
+D:\C#\File-Find\File Find\obj\Release\File Find.pdb

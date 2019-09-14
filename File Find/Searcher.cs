@@ -91,8 +91,8 @@ namespace File_Find
                         this.SearchWord = this.SearchWord.ToLower();
                     }
 
-                    //Not the most effeiciant way of searching for files/directories but this 
-                    //method prevents the search from canceling if an I/O execption is raised
+                    //Not the most efficient way of searching for files/directories but this 
+                    //method prevents the search from canceling if an I/O exception is raised
                     var pathsToSearch = new Queue<string>();
                     var foundFiles = new List<string>();
 
@@ -154,7 +154,7 @@ namespace File_Find
 
                             if (this.NavSubDirectories)
                             {
-                                //if user selected to naviagte sub directories
+                                //if user selected to navigate sub directories
                                 //queue sub directories up
                                 foreach (var subDir in Directory.GetDirectories(dir))
                                 {

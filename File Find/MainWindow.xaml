@@ -112,6 +112,8 @@
                                 </ContextMenu.BitmapEffect>
                                 <MenuItem Header="Open File" Name="OpenFileContextMenu"  Click="OpenFileContextMenu_OnClick"/>
                                 <MenuItem Header="Open File Location" Name="OpenDirectoryContextMenu" Click="OpenDirectoryContextMenu_OnClick"/>
+                                <Separator/>
+                                <MenuItem Header="Copy" Name="CopyDirectoryContextMenu" Click="CopyDirectoryContextMenu_OnClick"/>
                             </ContextMenu>
                         </ListView.ContextMenu>
                     </ListView>

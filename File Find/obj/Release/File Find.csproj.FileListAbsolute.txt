@@ -30,3 +30,7 @@ D:\C#\File-Find\File Find\obj\Release\File Find.csproj.GenerateResource.cache
 D:\C#\File-Find\File Find\obj\Release\File Find.csproj.CoreCompileInputs.cache
 D:\C#\File-Find\File Find\obj\Release\File Find.exe
 D:\C#\File-Find\File Find\obj\Release\File Find.pdb
+D:\C#\File-Find\File Find\obj\Release\File Find.csproj.CopyComplete
+D:\C#\File-Find\File Find\bin\Release\System.Windows.Controls.Input.Toolkit.dll
+D:\C#\File-Find\File Find\bin\Release\System.Windows.Controls.Layout.Toolkit.dll
+D:\C#\File-Find\File Find\bin\Release\WPFToolkit.dll

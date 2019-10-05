@@ -31,7 +31,13 @@ namespace File_Find
         {
             InitializeComponent();
 
-            //Set the default filetype as All Files
+            if (Environment.GetCommandLineArgs().Length > 1)
+            {
+                //If the application is started with a directory argument, fill in the directory textbox
+                directory_txtbx.Text = Environment.GetCommandLineArgs()[1].ToString();
+            }
+
+            //Set the default file-type as All Files
             fileType_cmbx.SelectedIndex = 4;
             EnforceStipulations();
 
@@ -99,6 +105,7 @@ namespace File_Find
             try
             {
                 EnforceStipulations();
+
 
                 statusError_lbl.Content = "";
                 loading_prgbar.IsIndeterminate = true;
@@ -323,5 +330,7 @@ namespace File_Find
                 System.Windows.Clipboard.SetText(clipboard);
             }
         }
+
+       
     }
 }

@@ -1,0 +1,53 @@
+D:\C#\File Find\File Find\bin\Debug\File Find.exe.config
+D:\C#\File Find\File Find\bin\Debug\File Find.exe
+D:\C#\File Find\File Find\bin\Debug\File Find.pdb
+D:\C#\File Find\File Find\obj\Debug\File Find.csprojAssemblyReference.cache
+D:\C#\File Find\File Find\obj\Debug\MainWindow.g.cs
+D:\C#\File Find\File Find\obj\Debug\App.g.cs
+D:\C#\File Find\File Find\obj\Debug\File Find_MarkupCompile.cache
+D:\C#\File Find\File Find\obj\Debug\File Find_MarkupCompile.lref
+D:\C#\File Find\File Find\obj\Debug\MainWindow.baml
+D:\C#\File Find\File Find\obj\Debug\File Find.g.resources
+D:\C#\File Find\File Find\obj\Debug\File_Find.Properties.Resources.resources
+D:\C#\File Find\File Find\obj\Debug\File Find.csproj.GenerateResource.cache
+D:\C#\File Find\File Find\obj\Debug\File Find.csproj.CoreCompileInputs.cache
+D:\C#\File Find\File Find\obj\Debug\File Find.exe
+D:\C#\File Find\File Find\obj\Debug\File Find.pdb
+D:\C#\File Find\File Find\obj\Debug\File Find.csproj.ResolveComReference.cache
+D:\C#\File-Find\File Find\bin\Debug\File Find.exe.config
+D:\C#\File-Find\File Find\bin\Debug\File Find.exe
+D:\C#\File-Find\File Find\bin\Debug\File Find.pdb
+D:\C#\File-Find\File Find\obj\Debug\File Find.csprojAssemblyReference.cache
+D:\C#\File-Find\File Find\obj\Debug\File Find.csproj.ResolveComReference.cache
+D:\C#\File-Find\File Find\obj\Debug\MainWindow.g.cs
+D:\C#\File-Find\File Find\obj\Debug\App.g.cs
+D:\C#\File-Find\File Find\obj\Debug\File Find_MarkupCompile.cache
+D:\C#\File-Find\File Find\obj\Debug\File Find_MarkupCompile.lref
+D:\C#\File-Find\File Find\obj\Debug\MainWindow.baml
+D:\C#\File-Find\File Find\obj\Debug\File Find.g.resources
+D:\C#\File-Find\File Find\obj\Debug\File_Find.Properties.Resources.resources
+D:\C#\File-Find\File Find\obj\Debug\File Find.csproj.GenerateResource.cache
+D:\C#\File-Find\File Find\obj\Debug\File Find.csproj.CoreCompileInputs.cache
+D:\C#\File-Find\File Find\obj\Debug\File Find.exe
+D:\C#\File-Find\File Find\obj\Debug\File Find.pdb
+D:\C#\File-Find\File Find\obj\Debug\File Find.csproj.CopyComplete
+D:\C#\File-Find\File Find\bin\Debug\WPFToolkit.dll
+C:\Users\alorenz\Helper Projects\File-Find\File Find\bin\Debug\File Find.exe.config
+C:\Users\alorenz\Helper Projects\File-Find\File Find\bin\Debug\File Find.exe
+C:\Users\alorenz\Helper Projects\File-Find\File Find\bin\Debug\File Find.pdb
+C:\Users\alorenz\Helper Projects\File-Find\File Find\bin\Debug\System.Windows.Controls.Input.Toolkit.dll
+C:\Users\alorenz\Helper Projects\File-Find\File Find\bin\Debug\System.Windows.Controls.Layout.Toolkit.dll
+C:\Users\alorenz\Helper Projects\File-Find\File Find\bin\Debug\WPFToolkit.dll
+C:\Users\alorenz\Helper Projects\File-Find\File Find\obj\Debug\File Find.csproj.ResolveComReference.cache
+C:\Users\alorenz\Helper Projects\File-Find\File Find\obj\Debug\MainWindow.g.cs
+C:\Users\alorenz\Helper Projects\File-Find\File Find\obj\Debug\App.g.cs
+C:\Users\alorenz\Helper Projects\File-Find\File Find\obj\Debug\File Find_MarkupCompile.cache
+C:\Users\alorenz\Helper Projects\File-Find\File Find\obj\Debug\File Find_MarkupCompile.lref
+C:\Users\alorenz\Helper Projects\File-Find\File Find\obj\Debug\MainWindow.baml
+C:\Users\alorenz\Helper Projects\File-Find\File Find\obj\Debug\File Find.g.resources
+C:\Users\alorenz\Helper Projects\File-Find\File Find\obj\Debug\File_Find.Properties.Resources.resources
+C:\Users\alorenz\Helper Projects\File-Find\File Find\obj\Debug\File Find.csproj.GenerateResource.cache
+C:\Users\alorenz\Helper Projects\File-Find\File Find\obj\Debug\File Find.csproj.CoreCompileInputs.cache
+C:\Users\alorenz\Helper Projects\File-Find\File Find\obj\Debug\File Find.csproj.CopyComplete
+C:\Users\alorenz\Helper Projects\File-Find\File Find\obj\Debug\File Find.exe
+C:\Users\alorenz\Helper Projects\File-Find\File Find\obj\Debug\File Find.pdb

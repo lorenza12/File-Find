@@ -107,8 +107,9 @@ namespace File_Find
 
                         try
                         {
+                            string searchExtension = "*" + this.FileType;
                             //if user wants to search in files, we need to check all files (*) regardless of their name
-                            var files = Directory.GetFiles(dir, (this.FindInFiles ? "*" : searchFile));
+                            var files = Directory.GetFiles(dir, (this.FindInFiles ? searchExtension : searchFile));
 
                             if (this.findInFiles)
                             {
@@ -303,14 +304,20 @@ namespace File_Find
                         string searchRegex = @"(^|\s)" + this.SearchWord + @"(\s|$)";
                         if (Regex.IsMatch(ReadValue, searchRegex))
                         {
-                            matches.Add(file);
+                            if (!matches.Contains(file))
+                            {
+                                matches.Add(file);
+                            }
                         }
                     }
                     else
                     {
                         if (ReadValue.Contains(this.SearchWord))
                         {
-                            matches.Add(file);
+                            if (!matches.Contains(file))
+                            {
+                                matches.Add(file);
+                            }
                         }
                     }
 
@@ -362,14 +369,20 @@ namespace File_Find
                         string searchRegex = @"(^|\s)" + this.SearchWord + @"(\s|$)";
                         if (Regex.IsMatch(fileContents, searchRegex))
                         {
-                            matches.Add(file);
+                            if (!matches.Contains(file))
+                            {
+                                matches.Add(file);
+                            }
                         }
                     }
                     else
                     {
                         if (fileContents.Contains(this.SearchWord))
                         {
-                            matches.Add(file);
+                            if (!matches.Contains(file))
+                            {
+                                matches.Add(file);
+                            }
                         }
                     }
                 }
@@ -415,14 +428,20 @@ namespace File_Find
                                 string searchRegex = @"(^|\s)" + this.SearchWord + @"(\s|$)";
                                 if (Regex.IsMatch(temp, searchRegex))
                                 {
-                                    matches.Add(file);
+                                    if (!matches.Contains(file))
+                                    {
+                                        matches.Add(file);
+                                    }
                                 }
                             }
                             else
                             {
                                 if (temp.Contains(this.SearchWord))
                                 {
-                                    matches.Add(file);
+                                    if (!matches.Contains(file))
+                                    {
+                                        matches.Add(file);
+                                    }
 
                                 }
                             }

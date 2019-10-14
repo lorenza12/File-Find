@@ -34,3 +34,22 @@ D:\C#\File-Find\File Find\obj\Release\File Find.csproj.CopyComplete
 D:\C#\File-Find\File Find\bin\Release\System.Windows.Controls.Input.Toolkit.dll
 D:\C#\File-Find\File Find\bin\Release\System.Windows.Controls.Layout.Toolkit.dll
 D:\C#\File-Find\File Find\bin\Release\WPFToolkit.dll
+C:\Users\alorenz\Helper Projects\File-Find\File Find\obj\Release\File Find.csproj.ResolveComReference.cache
+C:\Users\alorenz\Helper Projects\File-Find\File Find\obj\Release\MainWindow.g.cs
+C:\Users\alorenz\Helper Projects\File-Find\File Find\obj\Release\App.g.cs
+C:\Users\alorenz\Helper Projects\File-Find\File Find\obj\Release\File Find_MarkupCompile.cache
+C:\Users\alorenz\Helper Projects\File-Find\File Find\obj\Release\File Find_MarkupCompile.lref
+C:\Users\alorenz\Helper Projects\File-Find\File Find\obj\Release\File Find.exe
+C:\Users\alorenz\Helper Projects\File-Find\File Find\obj\Release\File Find.pdb
+C:\Users\alorenz\Helper Projects\File-Find\File Find\bin\Release\File Find.exe.config
+C:\Users\alorenz\Helper Projects\File-Find\File Find\bin\Release\File Find.exe
+C:\Users\alorenz\Helper Projects\File-Find\File Find\bin\Release\File Find.pdb
+C:\Users\alorenz\Helper Projects\File-Find\File Find\bin\Release\System.Windows.Controls.Input.Toolkit.dll
+C:\Users\alorenz\Helper Projects\File-Find\File Find\bin\Release\System.Windows.Controls.Layout.Toolkit.dll
+C:\Users\alorenz\Helper Projects\File-Find\File Find\bin\Release\WPFToolkit.dll
+C:\Users\alorenz\Helper Projects\File-Find\File Find\obj\Release\MainWindow.baml
+C:\Users\alorenz\Helper Projects\File-Find\File Find\obj\Release\File Find.g.resources
+C:\Users\alorenz\Helper Projects\File-Find\File Find\obj\Release\File_Find.Properties.Resources.resources
+C:\Users\alorenz\Helper Projects\File-Find\File Find\obj\Release\File Find.csproj.GenerateResource.cache
+C:\Users\alorenz\Helper Projects\File-Find\File Find\obj\Release\File Find.csproj.CoreCompileInputs.cache
+C:\Users\alorenz\Helper Projects\File-Find\File Find\obj\Release\File Find.csproj.CopyComplete

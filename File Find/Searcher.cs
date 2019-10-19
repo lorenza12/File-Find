@@ -117,7 +117,7 @@ namespace File_Find
 
                                 var inFilesResults = CheckInFiles(files);
 
-                                //can't concat null list so must specifically check
+                                //can't concatenate null list so must specifically check
                                 if (foundInFiles.Count == 0 && inFilesResults.Count > 0)
                                 {
                                     foundInFiles = inFilesResults;
@@ -130,7 +130,7 @@ namespace File_Find
 
                                 else
                                 {
-                                    //both list have data or both list are empty so concat them 
+                                    //both list have data or both list are empty so concatenate them 
                                     foundInFiles = foundInFiles.Concat(inFilesResults).ToList();
                                 }
 
@@ -178,7 +178,7 @@ namespace File_Find
 
                     if (this.findInFiles)
                     {
-                        //can't concat null list so must specifically check
+                        //can't concatenate null list so must specifically check
                         if (foundInFiles.Count == 0 && foundFiles.Count > 0)
                         {
                             this.foundFiles = foundFiles.ToArray();
@@ -189,7 +189,7 @@ namespace File_Find
                         }
                         else
                         {
-                            //both list have data or both list are empty so concat them 
+                            //both list have data or both list are empty so concatenate them 
                             this.foundFiles = foundInFiles.Concat(foundFiles).ToList().ToArray();
                         }
                     }
@@ -349,7 +349,7 @@ namespace File_Find
             {
                 try
                 {
-                    //For file types not listed on the dropdown, try and read them like text files
+                    //For file types not listed on the drop-down, try and read them like text files
                     //If we cant, just skip them
                     string fileContents;
                     using (StreamReader streamReader = new StreamReader(file, Encoding.UTF8))

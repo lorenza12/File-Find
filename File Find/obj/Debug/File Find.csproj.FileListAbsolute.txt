@@ -1,34 +1,20 @@
-D:\C#\File Find\File Find\bin\Debug\File Find.exe.config
-D:\C#\File Find\File Find\bin\Debug\File Find.exe
-D:\C#\File Find\File Find\bin\Debug\File Find.pdb
-D:\C#\File Find\File Find\obj\Debug\File Find.csprojAssemblyReference.cache
-D:\C#\File Find\File Find\obj\Debug\MainWindow.g.cs
-D:\C#\File Find\File Find\obj\Debug\App.g.cs
-D:\C#\File Find\File Find\obj\Debug\File Find_MarkupCompile.cache
-D:\C#\File Find\File Find\obj\Debug\File Find_MarkupCompile.lref
-D:\C#\File Find\File Find\obj\Debug\MainWindow.baml
-D:\C#\File Find\File Find\obj\Debug\File Find.g.resources
-D:\C#\File Find\File Find\obj\Debug\File_Find.Properties.Resources.resources
-D:\C#\File Find\File Find\obj\Debug\File Find.csproj.GenerateResource.cache
-D:\C#\File Find\File Find\obj\Debug\File Find.csproj.CoreCompileInputs.cache
-D:\C#\File Find\File Find\obj\Debug\File Find.exe
-D:\C#\File Find\File Find\obj\Debug\File Find.pdb
-D:\C#\File Find\File Find\obj\Debug\File Find.csproj.ResolveComReference.cache
-D:\C#\File-Find\File Find\bin\Debug\File Find.exe.config
-D:\C#\File-Find\File Find\bin\Debug\File Find.exe
-D:\C#\File-Find\File Find\bin\Debug\File Find.pdb
-D:\C#\File-Find\File Find\obj\Debug\File Find.csprojAssemblyReference.cache
-D:\C#\File-Find\File Find\obj\Debug\File Find.csproj.ResolveComReference.cache
-D:\C#\File-Find\File Find\obj\Debug\MainWindow.g.cs
-D:\C#\File-Find\File Find\obj\Debug\App.g.cs
-D:\C#\File-Find\File Find\obj\Debug\File Find_MarkupCompile.cache
-D:\C#\File-Find\File Find\obj\Debug\File Find_MarkupCompile.lref
-D:\C#\File-Find\File Find\obj\Debug\MainWindow.baml
-D:\C#\File-Find\File Find\obj\Debug\File Find.g.resources
-D:\C#\File-Find\File Find\obj\Debug\File_Find.Properties.Resources.resources
-D:\C#\File-Find\File Find\obj\Debug\File Find.csproj.GenerateResource.cache
-D:\C#\File-Find\File Find\obj\Debug\File Find.csproj.CoreCompileInputs.cache
-D:\C#\File-Find\File Find\obj\Debug\File Find.exe
-D:\C#\File-Find\File Find\obj\Debug\File Find.pdb
-D:\C#\File-Find\File Find\obj\Debug\File Find.csproj.CopyComplete
-D:\C#\File-Find\File Find\bin\Debug\WPFToolkit.dll
+D:\Chrome Downloads\File-Find Updated-20191019T143154Z-001\File-Find Updated\File Find\bin\Debug\File Find.exe.config
+D:\Chrome Downloads\File-Find Updated-20191019T143154Z-001\File-Find Updated\File Find\bin\Debug\File Find.exe
+D:\Chrome Downloads\File-Find Updated-20191019T143154Z-001\File-Find Updated\File Find\bin\Debug\File Find.pdb
+D:\Chrome Downloads\File-Find Updated-20191019T143154Z-001\File-Find Updated\File Find\bin\Debug\System.Windows.Controls.Input.Toolkit.dll
+D:\Chrome Downloads\File-Find Updated-20191019T143154Z-001\File-Find Updated\File Find\bin\Debug\System.Windows.Controls.Layout.Toolkit.dll
+D:\Chrome Downloads\File-Find Updated-20191019T143154Z-001\File-Find Updated\File Find\bin\Debug\WPFToolkit.dll
+D:\Chrome Downloads\File-Find Updated-20191019T143154Z-001\File-Find Updated\File Find\obj\Debug\File Find.csprojAssemblyReference.cache
+D:\Chrome Downloads\File-Find Updated-20191019T143154Z-001\File-Find Updated\File Find\obj\Debug\File Find.csproj.ResolveComReference.cache
+D:\Chrome Downloads\File-Find Updated-20191019T143154Z-001\File-Find Updated\File Find\obj\Debug\MainWindow.g.cs
+D:\Chrome Downloads\File-Find Updated-20191019T143154Z-001\File-Find Updated\File Find\obj\Debug\App.g.cs
+D:\Chrome Downloads\File-Find Updated-20191019T143154Z-001\File-Find Updated\File Find\obj\Debug\File Find_MarkupCompile.cache
+D:\Chrome Downloads\File-Find Updated-20191019T143154Z-001\File-Find Updated\File Find\obj\Debug\File Find_MarkupCompile.lref
+D:\Chrome Downloads\File-Find Updated-20191019T143154Z-001\File-Find Updated\File Find\obj\Debug\MainWindow.baml
+D:\Chrome Downloads\File-Find Updated-20191019T143154Z-001\File-Find Updated\File Find\obj\Debug\File Find.g.resources
+D:\Chrome Downloads\File-Find Updated-20191019T143154Z-001\File-Find Updated\File Find\obj\Debug\File_Find.Properties.Resources.resources
+D:\Chrome Downloads\File-Find Updated-20191019T143154Z-001\File-Find Updated\File Find\obj\Debug\File Find.csproj.GenerateResource.cache
+D:\Chrome Downloads\File-Find Updated-20191019T143154Z-001\File-Find Updated\File Find\obj\Debug\File Find.csproj.CoreCompileInputs.cache
+D:\Chrome Downloads\File-Find Updated-20191019T143154Z-001\File-Find Updated\File Find\obj\Debug\File Find.csproj.CopyComplete
+D:\Chrome Downloads\File-Find Updated-20191019T143154Z-001\File-Find Updated\File Find\obj\Debug\File Find.exe
+D:\Chrome Downloads\File-Find Updated-20191019T143154Z-001\File-Find Updated\File Find\obj\Debug\File Find.pdb

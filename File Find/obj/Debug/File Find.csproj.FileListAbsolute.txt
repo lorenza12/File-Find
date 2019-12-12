@@ -51,3 +51,4 @@ C:\Users\alorenz\Helper Projects\File-Find\File Find\obj\Debug\File Find.csproj.
 C:\Users\alorenz\Helper Projects\File-Find\File Find\obj\Debug\File Find.csproj.CopyComplete
 C:\Users\alorenz\Helper Projects\File-Find\File Find\obj\Debug\File Find.exe
 C:\Users\alorenz\Helper Projects\File-Find\File Find\obj\Debug\File Find.pdb
+C:\Users\alorenz\Helper Projects\File-Find\File Find\obj\Debug\File Find.csprojAssemblyReference.cache

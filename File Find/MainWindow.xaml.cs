@@ -1,21 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Forms;
 using System.IO;
-using System.Windows.Media.Animation;
-using System.ComponentModel;
 using System.Diagnostics;
 
 namespace File_Find
@@ -212,6 +201,14 @@ namespace File_Find
             {
                 searcher.MatchCase = false;
             }
+            if (includeDir_chbx.IsChecked ?? false)
+            {
+                searcher.IncludeDirectories = true;
+            }
+            else
+            {
+                searcher.IncludeDirectories = false;
+            }
         }
 
         private void CheckEnterHandler(object sender, System.Windows.Input.KeyEventArgs e)
@@ -331,6 +328,77 @@ namespace File_Find
             }
         }
 
-       
+        private void FoundFilesCntxtmnu_open(object sender, ContextMenuEventArgs e)
+        {
+            bool itemSelected = foundFiles_lstbx.SelectedItems.Count > 0;
+
+            openDirectory_contextMenu.IsEnabled = itemSelected;
+            copyDirectory_contextMenu.IsEnabled = itemSelected;
+            openFile_contextMenu.IsEnabled = itemSelected;
+
+        }
+
+        private void searchTxtbx_drop(object sender, System.Windows.DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(System.Windows.DataFormats.FileDrop))
+            {
+                string[] files = e.Data.GetData(System.Windows.DataFormats.FileDrop) as string[];
+                if (files != null && files.Length > 0)
+                {
+                    string searchText = string.Empty;
+
+                    foreach (var path in files)
+                    {
+                        if (File.GetAttributes(path).HasFlag(FileAttributes.Directory))
+                        {
+                            string directory = Path.GetFileName(path);
+                            searchText += $"{directory},";
+                        }
+                        else
+                        {
+                            string fileName = Path.GetFileNameWithoutExtension(path);
+                            searchText += $"{fileName},";
+                        }
+                    }
+
+                    ((System.Windows.Controls.TextBox)sender).Text = searchText.Trim(',');
+                }
+            }
+        }
+
+        private void directoryTxtbx_drop(object sender, System.Windows.DragEventArgs e)
+        {
+            if (e.Data.GetDataPresent(System.Windows.DataFormats.FileDrop))
+            {
+                string[] files = e.Data.GetData(System.Windows.DataFormats.FileDrop) as string[];
+                if (files != null && files.Length > 0)
+                {
+                    ((System.Windows.Controls.TextBox)sender).Text = files[0];
+                }
+            }
+        }
+
+        private void directoryTxtbx_previwDrop(object sender, System.Windows.DragEventArgs e)
+        {
+            //Only allow one directory to be dropped into the directory box
+            if (e.Data.GetDataPresent(System.Windows.DataFormats.FileDrop))
+            {
+                string[] files = e.Data.GetData(System.Windows.DataFormats.FileDrop) as string[];
+                if (files != null && files.Length == 1)
+                {
+                    if (File.GetAttributes(files[0]).HasFlag(FileAttributes.Directory))
+                    {
+                        e.Handled = true;
+                    }
+                }
+            }
+
+        }
+
+        private void searchTxtbx_previwDrop(object sender, System.Windows.DragEventArgs e)
+        {
+            //Any file or directory can be dropped into the search textbox
+            e.Handled = true;
+        }
     }
 }

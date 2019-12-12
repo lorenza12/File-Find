@@ -6,8 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using Microsoft.Office.Interop.Word;
+
 
 namespace File_Find
 {
@@ -20,7 +19,9 @@ namespace File_Find
         private bool matchWholeWord;
         private bool findInFiles;
         private bool matchCase;
+        private bool includeDirectories;
         private string[] foundFiles;
+        private List<string> foundFilesWorker;
 
         public string errorMessage;
 
@@ -33,19 +34,23 @@ namespace File_Find
             this.matchWholeWord = false;
             this.findInFiles = false;
             this.matchCase = false;
+            this.includeDirectories = false;
             this.foundFiles = new string[] { };
+            this.foundFilesWorker = new List<string>();
         }
 
-        public Searcher(string srchhDir, string srchWord, string fileTyp, bool navSubDirs, bool matchWholeWrd, bool findInFls, bool matchCase)
+        public Searcher(string srchDir, string srchWord, string fileTyp, bool navSubDirs, bool matchWholeWrd, bool findInFls, bool matchCase, bool includeDirectories)
         {
-            this.searchDirectory = srchhDir;
+            this.searchDirectory = srchDir;
             this.SearchWord = srchWord;
             this.fileType = fileTyp;
             this.navSubDirectories = navSubDirs;
             this.matchWholeWord = matchWholeWrd;
             this.findInFiles = findInFls;
             this.matchCase = matchCase;
+            this.includeDirectories = includeDirectories;
             this.foundFiles = new string[] { };
+            this.foundFilesWorker = new List<string>();
 
         }
 
@@ -56,14 +61,14 @@ namespace File_Find
         public bool MatchWholeWord { get => matchWholeWord; set => matchWholeWord = value; }
         public bool FindInFiles { get => findInFiles; set => findInFiles = value; }
         public bool MatchCase { get => matchCase; set => matchCase = value; }
+        public bool IncludeDirectories { get => includeDirectories; set => includeDirectories = value; }
         public string[] FoundFiles { get => foundFiles; set => foundFiles = value; }
 
-        public void SearchForFiles()
+        private void Search(string searchWord)
         {
             try
             {
                 this.errorMessage = "";
-                ClearFoundFiles();
 
                 if (!Directory.Exists(this.searchDirectory))
                 {
@@ -74,27 +79,67 @@ namespace File_Find
 
                 else
                 {
-
                     string searchFile = "";
                     if (this.MatchWholeWord)
                     {
-                        searchFile = this.SearchWord + this.FileType;
+                        searchFile = searchWord + this.FileType;
                     }
 
                     else
                     {
-                        searchFile = $"*{this.SearchWord.Trim()}*{this.FileType}";
+                        searchFile = $"*{searchWord.Trim()}*{this.FileType}";
                     }
 
                     if (!this.MatchCase)
                     {
-                        this.SearchWord = this.SearchWord.ToLower();
+                        searchWord = searchWord.ToLower();
                     }
+
+                    //First try and specifically look for directories that match if requested.
+                    //We could still get an I/O error so we will manually check later as well
+                    if (this.includeDirectories)
+                    {
+                        try
+                        {
+                            string dirSearch;
+
+                            if (this.matchWholeWord)
+                            {
+                                dirSearch = searchWord;
+                            }
+                            else
+                            {
+                                dirSearch = $"*{searchWord}*";
+                            }
+
+                            string[] foundDirectories;
+
+                            if (this.NavSubDirectories)
+                            {
+
+                                foundDirectories = Directory.GetDirectories(this.SearchDirectory, dirSearch, SearchOption.AllDirectories);
+                            }
+                            else
+                            {
+                                foundDirectories = Directory.GetDirectories(this.SearchDirectory, dirSearch, SearchOption.TopDirectoryOnly);
+                            }
+
+                            foreach (string dir in foundDirectories)
+                            {
+                                if (!this.foundFilesWorker.Contains(dir))
+                                    foundFilesWorker.Add(dir);
+                            }
+                        }
+                        catch
+                        {
+                            // I/O error
+                        }
+                    }
+
 
                     //Not the most efficient way of searching for files/directories but this 
                     //method prevents the search from canceling if an I/O exception is raised
                     var pathsToSearch = new Queue<string>();
-                    var foundFiles = new List<string>();
 
                     //only used if we are searching within files
                     var foundInFiles = new List<string>();
@@ -107,25 +152,43 @@ namespace File_Find
 
                         try
                         {
+                            if (this.includeDirectories)
+                            {
+                                string tempDir = dir;
+                                FileAttributes dirAttribute = File.GetAttributes(dir);
+                                if (!this.MatchCase)
+                                {
+                                    tempDir = dir.ToLower();
+                                }
+
+                                if (dirAttribute.HasFlag(FileAttributes.Directory))
+                                {
+                                    if (new DirectoryInfo(tempDir).Name.Contains(searchWord) && !foundFilesWorker.Contains(dir))
+                                    {
+                                        foundFilesWorker.Add(dir);
+                                    }
+                                }
+                            }
+                        }
+                        catch (Exception)
+                        {
+
+                        }
+
+                        try
+                        {
                             string searchExtension = "*" + this.FileType;
                             //if user wants to search in files, we need to check all files (*) regardless of their name
                             var files = Directory.GetFiles(dir, (this.FindInFiles ? searchExtension : searchFile));
 
                             if (this.findInFiles)
                             {
-                                //foundInFiles.Concat(CheckInFiles(files));
-
                                 var inFilesResults = CheckInFiles(files);
 
                                 //can't concat null list so must specifically check
                                 if (foundInFiles.Count == 0 && inFilesResults.Count > 0)
                                 {
                                     foundInFiles = inFilesResults;
-                                }
-
-                                else if (inFilesResults.Count == 0 && foundInFiles.Count > 0)
-                                {
-                                    //skip because nothing was found in the files so we don't need to add any
                                 }
 
                                 else
@@ -141,15 +204,15 @@ namespace File_Find
                                 if (this.MatchCase)
                                 {
                                     //Contains method is case sensitive search
-                                    if (file.Contains(this.SearchWord))
+                                    if (file.Contains(searchWord) && !foundFilesWorker.Contains(file))
                                     {
-                                        foundFiles.Add(file);
+                                        foundFilesWorker.Add(file);
                                     }
 
                                 }
-                                else
+                                else if (!foundFilesWorker.Contains(file))
                                 {
-                                    foundFiles.Add(file);
+                                    foundFilesWorker.Add(file);
                                 }
                             }
 
@@ -176,36 +239,39 @@ namespace File_Find
                         }
                     }
 
-                    if (this.findInFiles)
-                    {
-                        //can't concat null list so must specifically check
-                        if (foundInFiles.Count == 0 && foundFiles.Count > 0)
-                        {
-                            this.foundFiles = foundFiles.ToArray();
-                        }
-                        else if (foundFiles.Count == 0 && foundInFiles.Count > 0)
-                        {
-                            this.foundFiles = foundInFiles.ToArray();
-                        }
-                        else
-                        {
-                            //both list have data or both list are empty so concat them 
-                            this.foundFiles = foundInFiles.Concat(foundFiles).ToList().ToArray();
-                        }
-                    }
-
-                    else
-                    {
-                        this.foundFiles = foundFiles.ToArray();
-                    }
+                    foundFilesWorker = foundFilesWorker.Union(foundInFiles).ToList();
                 }
             }
             catch (Exception e)
             {
-                //this.errorMessage = e.ToString();
-                this.errorMessage = "Error: " + e.ToString();
+                this.errorMessage = "Error: " + e.Message;
             }
         }
+
+        public void SearchForFiles()
+        {
+            try
+            {
+                var searchTerms = this.SearchWord.Trim(',').Trim().Split(',');
+                ClearFoundFiles();
+
+                foreach (var searchWord in searchTerms)
+                {
+                    Search(searchWord);
+                }
+
+                if (this.foundFilesWorker.Count > 0)
+                {
+                    this.foundFiles = foundFilesWorker.ToArray();
+                }
+            }
+            catch (Exception ex)
+            {
+                this.errorMessage += ex.Message;
+            }
+
+        }
+
         public string GetFileType(string lngFileType)
         {
             string fileType;
@@ -340,6 +406,7 @@ namespace File_Find
         private void ClearFoundFiles()
         {
             Array.Clear(this.FoundFiles, 0, this.FoundFiles.Length);
+            this.foundFilesWorker.Clear();
         }
 
         private List<string> CheckTextFile(string[] filesToCheck)

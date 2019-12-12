@@ -53,3 +53,4 @@ C:\Users\alorenz\Helper Projects\File-Find\File Find\obj\Release\File_Find.Prope
 C:\Users\alorenz\Helper Projects\File-Find\File Find\obj\Release\File Find.csproj.GenerateResource.cache
 C:\Users\alorenz\Helper Projects\File-Find\File Find\obj\Release\File Find.csproj.CoreCompileInputs.cache
 C:\Users\alorenz\Helper Projects\File-Find\File Find\obj\Release\File Find.csproj.CopyComplete
+C:\Users\alorenz\Helper Projects\File-Find\File Find\obj\Release\File Find.csprojAssemblyReference.cache

@@ -80,6 +80,7 @@ namespace File_Find
                 else
                 {
                     this.SearchWord = searchWord.Trim();
+
                     string searchFile = "";
                     if (this.MatchWholeWord)
                     {

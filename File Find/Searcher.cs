@@ -79,20 +79,21 @@ namespace File_Find
 
                 else
                 {
+                    this.SearchWord = searchWord.Trim();
                     string searchFile = "";
                     if (this.MatchWholeWord)
                     {
-                        searchFile = searchWord + this.FileType;
+                        searchFile = this.SearchWord + this.FileType;
                     }
 
                     else
                     {
-                        searchFile = $"*{searchWord.Trim()}*{this.FileType}";
+                        searchFile = $"*{this.SearchWord}*{this.FileType}";
                     }
 
                     if (!this.MatchCase)
                     {
-                        searchWord = searchWord.ToLower();
+                        this.SearchWord = searchWord.ToLower();
                     }
 
                     //First try and specifically look for directories that match if requested.
@@ -105,11 +106,11 @@ namespace File_Find
 
                             if (this.matchWholeWord)
                             {
-                                dirSearch = searchWord;
+                                dirSearch = this.SearchWord;
                             }
                             else
                             {
-                                dirSearch = $"*{searchWord}*";
+                                dirSearch = $"*{this.SearchWord}*";
                             }
 
                             string[] foundDirectories;
@@ -163,7 +164,8 @@ namespace File_Find
 
                                 if (dirAttribute.HasFlag(FileAttributes.Directory))
                                 {
-                                    if (new DirectoryInfo(tempDir).Name.Contains(searchWord) && !foundFilesWorker.Contains(dir))
+                                    string dirName = this.MatchCase ? new DirectoryInfo(tempDir).Name : new DirectoryInfo(tempDir).Name.ToLower();
+                                    if (dirName.Contains(this.SearchWord) && !foundFilesWorker.Contains(dir))
                                     {
                                         foundFilesWorker.Add(dir);
                                     }
